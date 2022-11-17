@@ -1,0 +1,295 @@
+﻿
+@{
+    ViewBag.Title = "Project";
+}
+@using FonProje.Models
+@model FonProje.Models.Proje
+
+@{ 
+    var ort = (Model.toplanan / Model.hedef) * 100;
+    var gun = Model.bitis_tarih - Model.baslangic_tarih;
+
+}
+
+
+<br />
+<br />
+<br />
+<div class="tab-container tab-black tab-center-container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tab-text-nav" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#tab17" role="tab" aria-expanded="true">Proje</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tab18" role="tab" aria-expanded="false">Galeri</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tab19" role="tab" aria-expanded="false">Ödüller</a>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+
+    <div class="top-m-space tab-content">
+        <div class="tab-pane fade active show" id="tab17" role="tabpanel" aria-expanded="true">
+
+            <section class="content-block">
+
+
+                <div class="content-wrapper">
+                    <section class="content-block">
+                        <div class="container">
+                            <div class="blog-title text-center pb-5">
+                                <h1>@Model.adi</h1>
+                            </div>
+                            <div class="portfolio-des top-space">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="text-block">
+                                            <div class="blog-desc pt-0">
+                                                <div class="blog-img">
+                                                    <div class="image-wrap">
+                                                        <figure class="">
+                                                            <div class="image-wrap">
+                                                                <figure class="">
+                                                                    <img src="@Model.kapak_resim" alt="images description">
+                                                                </figure>
+                                                            </div>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 bottom-space-medium-only">
+                                        <ul class="content-list info-list">
+                                            <br />
+                                            <li class="row">
+                                                <div class="col">
+                                                    <span class="text title"><h3>Hedef:</h3></span>
+                                                    <span class="text title"><h4>Toplanan:</h4></span>
+                                                </div>
+                                                <div class="col">
+                                                    <h3>@String.Format("{0:0}", Model.hedef)₺</h3>
+                                                    <h4>@String.Format("{0:0}", Model.toplanan)₺</h4>
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col">
+                                                    <div class="progress skill-bar">
+                                                        <div class="progress-bar  bg-primary wow slideInLeft" data-wow-duration="1s" role="progressbar" aria-valuenow="@String.Format("{0:0}", ort)" aria-valuemin="0" aria-valuemax="100" style="width: @String.Format("{0:0}", ort)%; visibility: visible; animation-duration: 1s; animation-name: slideInLeft;">
+                                                            <span class="skill"><span class="val">@String.Format("{0:0}", ort)%</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col" align="left">
+                                                    <span><i class="fa-duotone fa-user fa-xl"></i>&emsp;&emsp;&emsp;<b>   @Model.Kullanici.adi @Model.Kullanici.soyadi</b></span>
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col" align="left">
+                                                    <span><i class="fa-duotone fa-folder-open fa-xl"></i>&emsp;&emsp;&emsp;<b>@Model.Kategori.adi</b></span>
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col" align="left">
+                                                    <span><i class="fa-duotone fa-calendar-clock fa-xl"></i>&emsp;&emsp;&emsp;<b>@Model.baslangic_tarih.Day @Model.baslangic_tarih.ToString("MMMM") @Model.baslangic_tarih.Year - @Model.bitis_tarih.Day @Model.bitis_tarih.ToString("MMMM") @Model.bitis_tarih.Year <br />&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;(@gun.Days gün kaldı)</b></span>
+                                                    <p></p>
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col" align="left">
+                                                    <span><i class="fa-duotone fa-location-dot fa-2xl"></i>&emsp;&emsp;&emsp;<b> @Model.ilceler.iller.sehiradi / @Model.ilceler.ilceadi</b></span>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="col-lg-12" align="justify">
+                                        <p>
+                                            @Model.aciklama
+                                        </p>
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+        </div>
+        <div class="tab-pane fade" id="tab18" role="tabpanel" aria-expanded="false">
+            <div class="content-wrapper">
+                <section class="content-block">
+                    <div class="container">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div class="blog-title text-center pb-5">
+                            <h1>The age old question of chicken first or the egg?</h1>
+                        </div>
+                        <div class="demo-wrapper">
+                            <br />
+                            <br />
+                            <div class="row masonary-block default-gallery">
+                                @foreach (var item in Model.Resim)
+                                {
+                                    <div class="col-md-6 col-lg-4">
+                                        <figure class="caption-hover-full">
+                                            <a data-thumbnail="@item.resim1" class="fancybox-thumb fancy-pop" title="@Model.adi" href="@item.resim1" rel="gallery"></a>
+                                            <div class="image-wrapper"><img src="@item.resim1" alt="images description"></div>
+                                        </figure>
+                                    </div>
+                                }
+                                <div class="col-md-6 col-lg-4">
+                                    <figure class="caption-hover-full">
+                                        <a data-thumbnail="\Content\main\img\projects-images\proje.png" class="fancybox-thumb fancy-pop" title="The 1 age old question of chicken first or the egg?" href="\Content\main\img\projects-images\proje.png" rel="gallery"></a>
+                                        <div class="image-wrapper"><img src="\Content\main\img\projects-images\proje.png" alt="images description"></div>
+                                    </figure>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <figure class="caption-hover-full">
+                                        <a data-thumbnail="\Content\main\img\projects-images\proje.png" class="fancybox-thumb fancy-pop" title="The 1 age old question of chicken first or the egg?" href="\Content\main\img\projects-images\proje.png" rel="gallery"></a>
+                                        <div class="image-wrapper"><img src="\Content\main\img\projects-images\proje.png" alt="images description"></div>
+                                    </figure>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <figure class="caption-hover-full">
+                                        <a data-thumbnail="\Content\main\img\projects-images\proje.png" class="fancybox-thumb fancy-pop" title="The 1 age old question of chicken first or the egg?" href="\Content\main\img\projects-images\proje.png" rel="gallery"></a>
+                                        <div class="image-wrapper"><img src="\Content\main\img\projects-images\proje.png" alt="images description"></div>
+                                    </figure>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <figure class="caption-hover-full">
+                                        <a data-thumbnail="\Content\main\img\projects-images\proje.png" class="fancybox-thumb fancy-pop" title="The 1 age old question of chicken first or the egg?" href="\Content\main\img\projects-images\proje.png" rel="gallery"></a>
+                                        <div class="image-wrapper"><img src="\Content\main\img\projects-images\proje.png" alt="images description"></div>
+                                    </figure>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tab19" role="tabpanel" aria-expanded="false">
+            <div class="content-wrapper">
+                <section class="content-block">
+                    <div class="container">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div class="blog-title text-center pb-5">
+                            <h1>The age old question of chicken first or the egg?</h1>
+                        </div>
+                        <div class="demo-wrapper">
+                            <div class="demo-wrapper content-block pb-0">
+                                <div class="row">
+                                    @foreach (var item in Model.Bagis)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="pricing-box-v1 text-center">
+                                                @if (item.resim != null && item.resim != " " && item.resim != "")
+                                                {
+                                                    <div class="pricing-title bg-gray-light">
+                                                        <img src="@item.resim" alt="images description">
+                                                    </div>
+                                                }
+                                                <br />
+                                                <div>
+                                                    <h3>Gala Daveti</h3>
+                                                </div>
+                                                <div class="price">@String.Format("{0:0}", item.bagis1)<sup>₺</sup></div>
+                                                <div class="plan-features">
+                                                    <ul>
+                                                        <li align="justify">@item.aciklama</li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="btn-holder">
+                                                    <a href="@item.link" target="_blank" class="btn btn-trans-gray-light btn-sm">Destek Ol</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+
+
+                                    <div class="col-md-4">
+                                        <div class="pricing-box-v1 text-center">
+                                            <div class="pricing-title bg-gray-light">
+                                                <img src="/Content/main/img/projects-images/proje.png" alt="images description">
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <h3>Gala Daveti</h3>
+                                            </div>
+                                            <div class="price">20<sup>₺</sup></div>
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li align="justify">Önceki hediyelere ek; filmimizin galasına davetlimiz olacaksınız. +1’inizi de alıp gelin, filmin öncesinden, çekim anlarından ve sonraki yolculuğundan konuşalım.</li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="btn-holder">
+                                                <a href="https://iyzi.link/AIjTlA" target="_blank" class="btn btn-trans-gray-light btn-sm">Destek Ol</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="pricing-box-v1 text-center">
+                                            <div class="pricing-title bg-gray-light">
+                                                <img src="/Content/main/img/projects-images/proje.png" alt="images description">
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <h3>Gala Daveti</h3>
+                                            </div>
+                                            <div class="price">20<sup>₺</sup></div>
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li align="justify">Önceki hediyelere ek; filmimizin galasına davetlimiz olacaksınız. +1’inizi de alıp gelin, filmin öncesinden, çekim anlarından ve sonraki yolculuğundan konuşalım.</li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="btn-holder">
+                                                <a href="https://iyzi.link/AIjTlA" target="_blank" class="btn btn-trans-gray-light btn-sm">Destek Ol</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="pricing-box-v1 text-center">
+                                            <br>
+                                            <div>
+                                                <h3>Gala Daveti</h3>
+                                            </div>
+                                            <div class="price">20<sup>₺</sup></div>
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li align="justify">Önceki hediyelere ek; filmimizin galasına davetlimiz olacaksınız. +1’inizi de alıp gelin, filmin öncesinden, çekim anlarından ve sonraki yolculuğundan konuşalım.</li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="btn-holder">
+                                                <a href="https://iyzi.link/AIjTlA" target="_blank" class="btn btn-trans-gray-light btn-sm">Destek Ol</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

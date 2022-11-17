@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewBag.Title = "Projeler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model FonProje.Models.ViewModel
+@using FonProje.App_Start
+
+
+<h6 class="mb-0 text-uppercase">
+    Bekleyen Projeler (@Session["sayi"].ToString())
+</h6>
+<hr />
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Tesis Adı</th>
+                        <th>Kategori</th>
+                        <th>Aktif</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Durum</th>
+                        <th>Admin</th>
+                        <th>Düzenle</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Proje)
+                    {
+                        if (item.aktif != true && item.aktif != false)
+                        {
+
+                            <tr>
+                                <td>@item.adi</td>
+                                <td>@item.Kategori.adi</td>
+                                <td>
+                                    @if (item.aktif == true)
+                                    {
+                                        <i class="lni lni-checkmark"></i>
+                                    }
+                                    else if (item.aktif == false)
+                                    {
+                                        <i class="lni lni-close"></i>
+                                    }
+                                    else if (item.bitis_tarih < DateTime.Now)
+                                    {
+                                        <i class="lni lni-alarm-clock"></i>
+                                    }
+                                </td>
+                                <td>@item.tarih.ToString("d")</td>
+                                <td>@String.Format("{0:0}", item.toplanan) - @String.Format("{0:0}", item.hedef)</td>
+                                <td>@item.Kullanici.adi @item.Kullanici.soyadi</td>
+                                <td>
+                                    <a href="/ProjeDuzenle/@seo.Seo.AdresDuzenle(item.adi)-@item.projeID"><button type="button" class="btn btn-primary">Güncelle</button></a>
+
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#sil_@item.projeID">Sil</button>
+                                    <!-- Modal -->
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Tesis Adı</th>
+                        <th>Kategori</th>
+                        <th>Aktif</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Durum</th>
+                        <th>Admin</th>
+                        <th>Düzenle</th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<h6 class="mb-0 text-uppercase">Aktif Projeler</h6>
+<hr />
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Tesis Adı</th>
+                        <th>Kategori</th>
+                        <th>Aktif</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Durum</th>
+                        <th>Admin</th>
+                        <th>Düzenle</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Proje)
+                    {
+                        if (item.aktif == true)
+                        {
+                    <tr>
+                        <td>@item.adi</td>
+                        <td>@item.Kategori.adi</td>
+                        <td>
+                            @if (item.aktif == true)
+                            {
+                                <i class="lni lni-checkmark"></i>
+                            }
+                            else if (item.aktif == false)
+                            {
+                                <i class="lni lni-close"></i>
+                            }
+                        </td>
+                        <td>@item.tarih.ToString("d")</td>
+                        <td>@String.Format("{0:0}", item.toplanan) - @String.Format("{0:0}", item.hedef)</td>
+                        <td>@item.Kullanici.adi @item.Kullanici.soyadi</td>
+                        <td>
+                            <a href="/ProjeDuzenle/@seo.Seo.AdresDuzenle(item.adi)-@item.projeID"><button type="button" class="btn btn-primary">Güncelle</button></a>
+
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#sil_@item.projeID">Sil</button>
+                            <!-- Modal -->
+
+                        </td>
+                    </tr>
+
+                        }
+                    }
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Tesis Adı</th>
+                        <th>Kategori</th>
+                        <th>Aktif</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Durum</th>
+                        <th>Admin</th>
+                        <th>Düzenle</th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<h6 class="mb-0 text-uppercase">İptal Olan Projeler</h6>
+<hr />
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example3" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Tesis Adı</th>
+                        <th>Kategori</th>
+                        <th>Aktif</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Durum</th>
+                        <th>Admin</th>
+                        <th>Düzenle</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Proje)
+                    {
+                        if (item.aktif == false)
+                        {
+                    <tr>
+                        <td>@item.adi</td>
+                        <td>@item.Kategori.adi</td>
+                        <td>
+                            @if (item.aktif == true)
+                            {
+                                <i class="lni lni-checkmark"></i>
+                            }
+                            else if (item.aktif == false)
+                            {
+                                <i class="lni lni-close"></i>
+                            }
+                        </td>
+                        <td>@item.tarih.ToString("d")</td>
+                        <td>@String.Format("{0:0}", item.toplanan) - @String.Format("{0:0}", item.hedef)</td>
+                        <td>@item.Kullanici.adi @item.Kullanici.soyadi</td>
+                        <td>
+                            <a href="/ProjeDuzenle/@seo.Seo.AdresDuzenle(item.adi)-@item.projeID"><button type="button" class="btn btn-primary">Güncelle</button></a>
+
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#sil_@item.projeID">Sil</button>
+                            <!-- Modal -->
+
+                        </td>
+                    </tr>
+
+                        }
+                    }
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Tesis Adı</th>
+                        <th>Kategori</th>
+                        <th>Aktif</th>
+                        <th>Son Düzenlenme</th>
+                        <th>Durum</th>
+                        <th>Admin</th>
+                        <th>Düzenle</th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

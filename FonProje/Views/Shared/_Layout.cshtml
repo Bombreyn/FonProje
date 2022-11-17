@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Fonmalite</title>
+    <!-- Font Icons -->
+    <link media="all" rel="stylesheet" href="~/Content/main/css/fonts/icomoon/icomoon.css">
+    <!--     <link media="all" rel="stylesheet" href="css/fonts/roxine-font-icon/roxine-font.css"> -->
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/font-awesome/css/font-awesome.css">
+    <!-- Vendors -->
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/owl-carousel/dist/assets/owl.carousel.min.css">
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/owl-carousel/dist/assets/owl.theme.default.min.css">
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/animate/animate.css">
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/rateyo/jquery.rateyo.css">
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/bootstrap-datepicker/css/bootstrap-datepicker.css">
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/fancyBox/source/jquery.fancybox.css">
+    <link media="all" rel="stylesheet" href="~/Content/main/vendors/fancyBox/source/helpers/jquery.fancybox-thumbs.css">
+    <!-- Bootstrap 4 -->
+    <link media="all" rel="stylesheet" href="~/Content/main/css/bootstrap.css">
+    <!-- Rev Slider -->
+    <link rel="stylesheet" type="text/css" href="~/Content/main/vendors/rev-slider/revolution/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/main/vendors/rev-slider/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/main/vendors/rev-slider/revolution/css/navigation.css">
+    <!-- Theme CSS -->
+    <link media="all" rel="stylesheet" href="~/Content/main/css/main.css">
+    <!-- Custom CSS -->
+    <link media="all" rel="stylesheet" href="~/Content/main/css/custom.css">
+    <link href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+</head>
+<body class="white-overlay">
+    <div class="preloader" id="pageLoad">
+        <div class="holder">
+            <div class="coffee_cup"></div>
+        </div>
+    </div>
+    <nav class="nav-wrap bg-white">
+        <!-- opener inside of collapsible menu -->
+        <div class="nav-trigger nav-trigger-close">
+            <a href="#">Kapat <i class="icon-long-arrow-right"></i> </a>
+        </div>
+        <div class="divider-border"><span class="sr-only"></span></div>
+        <ul class="side-nav">
+
+            @if (Projes.Aktif.adminData == null)
+            {
+
+                <li><a href="/Admin/Login">Giriş Yap</a></li>
+                <li><a href="#">Kayıt Ol</a></li>
+            }
+            else
+            {
+
+                <li><h5>&nbsp;@Projes.Aktif.adminData.adi @Projes.Aktif.adminData.soyadi</h5></li>
+                <li><a href="#">Profil</a></li>
+                if (Projes.Aktif.adminData.yetkiID == 1)
+                {
+                    <li><a href="/Admin/Projects">Panel</a></li>
+                }
+                <li><a href="/Home/AddProject">Proje Başlat</a></li>
+                <li><a href="/Home/Logout">Çıkış Yap</a></li>
+
+            }
+        </ul>
+        <div class="divider-border"><span class="sr-only"></span></div>
+        <div class="p-3">
+            <ul class="social-network with-text" align="center">
+                <li><a href=""><i class="fa-brands fa-linkedin fa-2x"></i></a></li>
+                &nbsp;
+                <li><a href=""><i class="fa-brands fa-facebook fa-2x"></i></a></li>
+                &nbsp;
+                <li><a href=""><i class="fa-brands fa-twitter fa-2x"></i></a></li>
+                &nbsp;
+                <li><a href=""><i class="fa-brands fa-instagram fa-2x"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <style>
+        .about-banner2 {
+            background-image: url('../../Content/main/img/mini-bacground/bckgrnd.png');
+        }
+    </style>
+    <!--Side panel-->
+    <header class="fixed-top main-header header-white transparent with-side-panel-ico" id="waituk-main-header">
+        <div id="nav-section">
+            <div class="bottom-header container-fluid mega-menus" id="mega-menus">
+                <nav class="navbar navbar-toggleable-md no-border-radius no-margin mega-menu-multiple" id="navbar-inner-container">
+                    <button type="button" class="navbar-toggler navbar-toggler-left" data-toggle="collapse" data-target="#mega-menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand mr-auto m-sm-auto" href="/Home/Index"> <img src="~/Content/main/img/logo.png" alt="roxine"> <img src="~/Content/main/img/logo-dark.png" alt="roxine"> </a>
+                    <div class="collapse navbar-collapse flex-row-reverse" id="mega-menu">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="/Home/Index"> Anasayfa </a>
+                            </li>
+                            <li>
+                                <a href="/Home/About"> Hakkımızda </a>
+                            </li>
+                            <li>
+                                <a href="/Home/Projects"> Projeler </a>
+                            </li>
+                            <li class="dropdown right-dropdown" data-animation="fadeIn">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" data-title="Home"> Trendler </a>
+                                <ul class="dropdown-menu no-border-radius">
+                                    <li><a href="#"> Yeni Projeler </a></li>
+                                    <li><a href="#"> Bitmiş Projeler </a></li>
+                                    <li><a href="#"> Bitmek Üzere Olan Projeler </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Home/Contact"> İletişim </a>
+                            </li>
+                        </ul>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="navbar-pos-search with-side-panel">
+                        @*<a href="#" class="x-search x-search-trigger navbar-link"><i class="custom-icon-search"></i></a>*@
+                        <a href="#" class="x-search icon-close-round navbar-link"><i class="icon-line-cross"></i></a>
+                    </div>
+                    <div class="nav-trigger navbar-pos-search overlay-trigger">
+                        <a href="#" class="navbar-link"><i class="icon-sort-1"></i></a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        @if (ViewBag.title != "Anasayfa")
+        {
+            <section class="visual">
+                <div class="visual-inner about-banner2 dark-overlay parallax" data-stellar-background-ratio="0.55" background-image: url(.. /img/visual-small-01.jpg);>
+                    <div class="centered">
+                        <div class="container">
+                            <div class="visual-text visual-center">
+                                <h1 class="visual-title visual-sub-title">@ViewBag.Title</h1>
+                                <div class="breadcrumb-block">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/Home/Index"> Anasayfa </a></li>
+                                        <li class="breadcrumb-item active"> @ViewBag.Title </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        else
+        {
+
+            <div class="banner banner-home">
+                <!-- revolution slider starts -->
+                <div id="rev_slider_279_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="restaurant-header" style="margin:0px auto;background-color:#fff;padding:0px;margin-top:0px;margin-bottom:0px;">
+                    <div id="rev_slider_70_1" class="rev_slider fullscreenabanner" style="display:none;" data-version="5.1.4">
+                        <ul>
+                            <li class="slider-color-schema-dark" data-index="rs-2" data-transition="fade" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-title="Slide" data-description="">
+                                <!-- main image for revolution slider -->
+                                <img src="~/Content/main/img/big-14.jpg" alt="image description" data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-bgfit="cover" data-no-retina>
+                                <div class="tp-caption tp-shape tp-shapewrapper" id="slide-1699-layer-10" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full"
+                                     data-height="full" data-whitespace="nowrap" data-type="shape" data-basealign="slide" data-responsive_offset="on" data-responsive="off" data-frames='[{"from":"y:0;sX:1;sY:1;opacity:0;","speed":2500,"to":"o:1;","delay":500,"ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="background-color:rgba(0, 0, 0, 0.57);"> </div>
+                                <div class="slider-sub-title text-white tp-caption tp-resizeme rs-parallaxlevel-0" data-x="['left','left','left','left']" data-hoffset="['0','0','0','0']" data-y="['top','top','middle','middle']" data-voffset="['145','100','10','20']" data-width="['1200','960','720','540']" data-textalign="left" data-fontsize="['30','28','24','20']" data-lineheight="['72','62','50','50']" data-letterspacing="5" data-height="none" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="1000" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-paddingright="[25,25,25,25]" data-paddingleft="[25,25,25,25]">
+                                    Biz Birlikte Güçlüyüz
+                                </div>
+                                <div class="slider-main-title text-white tp-caption tp-resizeme rs-parallaxlevel-1" data-x="['left','left','left','left']" data-hoffset="['0','0','0','0']" data-y="['top','top','middle','middle']" data-voffset="['250','150','50','50']" data-width="['1200','960','720','540']" data-textalign="left" data-fontsize="['160','88','64','48']" data-fontweight="900" data-letterspacing="['25','10','5','0']" data-lineheight="['184','100','72','60']" data-height="none" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="1000" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-paddingright="[25,25,25,25]" data-paddingleft="[25,25,25,25]">
+                                    Fonmalite
+                                </div>
+                                <div class="slider-text text-white tp-caption tp-resizeme rs-parallaxlevel-2" data-x="['left','left','left','left']" data-hoffset="['0','0','0','0']" data-y="['top','top','middle','middle']" data-voffset="['450','230','110','110']" data-width="['600','555','555','480']" data-textalign="left" data-fontsize="['16','14','14','14']" data-lineheight="['30','30','22','22']" data-fontweight="400" data-height="none" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="1000" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-paddingright="[25,25,25,25]" data-paddingleft="[25,25,25,25]">
+                                    Türkiye'nin Kitle Fonlaması Platformu
+                                </div>
+                                <div class="tp-caption rev-btn  rs-parallaxlevel-10" id="slide-163-layer-1" data-x="['left','left','left','left']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['320','60','240','220']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power3.easeOut;" data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" data-transform_out="y:[175%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" data-mask_out="x:inherit;y:inherit;" data-start="1250" data-splitin="none" data-splitout="none" data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-164","delay":""}]' data-responsive_offset="on" data-paddingtop="[0,0,0,0]" data-paddingright="[25,25,25,25]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[25,25,25,25]">
+                                    <a class="btn btn-primary has-radius-small" href="/Home/Projects">Projeler</a>
+                                    <a class="btn btn-primary has-radius-small" href="/Home/AddProject">Proje Başlat</a>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @RenderBody()
+    </main>
+    <footer class="footer footer-v1">
+        <div class="content-block footer-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-nav inline-nav">
+                            <ul align="center">
+                                <li><a href="#">Anasayfa</a></li>
+                                <li><a href="#">Hakkımızda</a></li>
+                                <li><a href="#">Projeler</a></li>
+                                <li><a href="#">Trendler</a></li>
+                                <li><a href="#">İletişim</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-right">
+                        <br />
+                        <ul class="social-network with-text" align="center">
+                            <li><a href=""><i class="fa-brands fa-linkedin fa-2x"></i></a></li>
+                            <li><a href=""><i class="fa-brands fa-facebook fa-2x"></i></a></li>
+                            <li><a href=""><i class="fa-brands fa-twitter fa-2x"></i></a></li>
+                            <li><a href=""><i class="fa-brands fa-instagram fa-2x"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="divider-border-dark"><span class="sr-only">&nbsp;</span></div>
+                <div class="footer-logo text-center">
+                    <img src="~/Content/main/img/logo.svg" alt="image-description">
+                </div>
+                <br />
+                <div class="text-center">
+                    <a>&copy; @DateTime.Now.Year Foncu. ALL RIGHTS RESERVED.</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/footer of the page -->
+    <!-- search form wrapper -->
+    <a href="#" class="section-scroll" id="scroll-to-top"><i class="fa fa-angle-up"></i></a>
+    <!-- jquery library -->
+    <script src="~/content/main/vendors/jquery/jquery-2.1.4.min.js"></script>
+    <!-- external scripts -->
+    <script src="~/Content/main/vendors/tether/dist/js/tether.min.js"></script>
+    <script src="~/Content/main/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/main/vendors/stellar/jquery.stellar.min.js"></script>
+    <script src="~/Content/main/vendors/isotope/javascripts/isotope.pkgd.min.js"></script>
+    <script src="~/Content/main/vendors/isotope/javascripts/packery-mode.pkgd.js"></script>
+    <script src="~/Content/main/vendors/owl-carousel/dist/owl.carousel.js"></script>
+    <script src="~/Content/main/vendors/waypoint/waypoints.min.js"></script>
+    <script src="~/Content/main/vendors/counter-up/jquery.counterup.min.js"></script>
+    <script src="~/Content/main/vendors/fancyBox/source/jquery.fancybox.pack.js"></script>
+    <script src="~/Content/main/vendors/fancyBox/source/helpers/jquery.fancybox-thumbs.js"></script>
+    <script src="~/Content/main/vendors/image-stretcher-master/image-stretcher.js"></script>
+    <script src="~/Content/main/vendors/wow/wow.min.js"></script>
+    <script src="~/Content/main/vendors/rateyo/jquery.rateyo.js"></script>
+    <script src="~/Content/main/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/main/vendors/bootstrap-slider-master/src/js/bootstrap-slider.js"></script>
+    <script src="~/Content/main/vendors/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="~/Content/main/js/mega-menu.js"></script>
+    <!-- custom jquery script -->
+    <script src="~/Content/main/js/jquery.main.js"></script>
+    <!-- REVOLUTION JS FILES -->
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution/js/extensions/revolution.extension.video.min.js"></script>
+    <!-- SNOW ADD ON -->
+    <script type="text/javascript" src="~/Content/main/vendors/rev-slider/revolution-addons/snow/revolution.addon.snow.min.js"></script>
+    <!-- revolutions slider script -->
+    <script src="~/Content/main/js/revolution.js"></script>
+</body>
+
+</html>

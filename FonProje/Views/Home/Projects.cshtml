@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Projects";
+}
+
+@model FonProje.Models.ViewModel
+@using FonProje.App_Start
+
+<div class="content-wrapper">
+    <section class="content-block portfolio-block eighty-percent">
+        <div class="container">
+            <div class="accordion-container">
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingThree">
+                            <h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="text-align:center">KATEGORİLER</a></h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
+                            <div class="card-block">
+                                <ul class="filter-nav filter-nav-v2 text-center button-group filter-button-group">
+                                    <li>
+                                        <button class="is-checked btn-lg" data-filter="*">Hepsi</button>
+                                    </li>
+                                    @foreach (var item in Model.Kategoris)
+                                    {
+                                        <li>
+                                            <button data-filter=".@seo.Seo.AdresDuzenle(item.adi)" class="btn-lg">@item.adi</button>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row masonary-block grid">
+                @foreach (var item in Model.Proje)
+                {
+                    var gun = item.bitis_tarih - DateTime.Now;
+                    var ort = (item.toplanan / item.hedef) * 100;
+                    <div class="gallery-item col-md-6 col-lg-3 col-xl-3 @seo.Seo.AdresDuzenle(item.Kategori.adi)">
+                        <div class="post-grid reverse-grid">
+                            <div class="img-block post-img">
+                                <a href="#"><img src="@item.kapak_resim" alt="images"></a>
+                                <time class="post-date">@item.Kategori.adi</time>
+                            </div>
+                            <div class="post-text-block bg-gray-light">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>@String.Format("{0:0}", item.toplanan)₺</h5>
+                                    </div>
+                                    <div class="col">
+                                        <h5 align="right">@String.Format("{0:0}", item.hedef)₺</h5>
+                                    </div>
+                                </div>
+                                <div class="progress skill-bar">
+                                    <div class="progress-bar  bg-primary wow slideInLeft" data-wow-duration="1s" role="progressbar" aria-valuenow="@String.Format("{0:0}", ort)" aria-valuemin="0" aria-valuemax="100" style="width: @String.Format("{0:0}", ort)%; visibility: visible; animation-duration: 1s; animation-name: slideInLeft;">
+                                        <span class="skill"><span class="val">@String.Format("{0:00.0}", ort)%</span></span>
+                                    </div>
+                                </div>
+                                <br />
+                                <strong class="content-title mb-0"><a href="#">@item.adi</a></strong>
+                                <span class="content-sub-title"><a href="#" style="color:#5645ff">@item.Kullanici.adi @item.Kullanici.soyadi</a></span>
+                                <br />
+                                <span class="content-sub-title">@*<i class="fa-duotone fa-calendar-clock fa-large"></i>*@&nbsp;@item.baslangic_tarih.ToString("d") - @item.bitis_tarih.ToString("d") (@gun.Days gün kaldı)</span>
+                                <p>@item.kisa_aciklama</p>
+                                <div class="post-meta clearfix">
+                                    <div class="post-link-holder">
+                                        <a href="/Project/@seo.Seo.AdresDuzenle(item.Kategori.adi)/@seo.Seo.AdresDuzenle(item.adi)-@item.projeID">Devamını Oku<span class="fa fa-arrow-right"><span class="sr-only">&nbsp;</span></span></a>
+                                    </div>
+                                    <div class="post-social text-right">
+                                        <ul class="social-network social-small">
+                                            <li><a href="#"><span class="icon-facebook"><span class="sr-only">&nbsp;</span></span></a></li>
+                                            <li><a href="#"><span class="icon-twitter"><span class="sr-only">&nbsp;</span></span></a></li>
+                                            <li><a href="#"><span class="icon-linkedin"><span class="sr-only">&nbsp;</span></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
+</div>

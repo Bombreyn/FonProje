@@ -1,0 +1,332 @@
+﻿
+@{
+    ViewBag.Title = "Proje Ekle";
+}
+
+
+<script>
+
+    $(function () {
+        $('#DrpSehir').change(function () {
+            var id = $('#DrpSehir').val();
+            $.ajax({
+                url: '/Admin/ilcegetir',
+                data: { p: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                    $('#Drpilce').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#Drpilce').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</option>");
+
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+@model FonProje.Models.ViewModel
+
+<br />
+<br />
+<br />
+<div class="tab-container tab-black tab-center-container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tab-text-nav" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#tab17" role="tab" aria-expanded="true">Proje</a>
+        </li>
+        @if (ViewBag.title == "Proje Düzenle")
+        {
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab19" role="tab" aria-expanded="false">Ödüller</a>
+            </li>
+        }
+    </ul>
+    <br />
+    <br />
+    <div>
+        @if (Projes.Aktif.adminData == null)
+        {
+            Href("Login", "Admin");
+        }
+        else
+        {
+            <h4>
+                @Projes.Aktif.adminData.adi @Projes.Aktif.adminData.soyadi
+            </h4>
+        }
+    </div>
+
+    <!-- Tab panes -->
+    <div class="top-m-space tab-content">
+        <div class="tab-pane fade active show" id="tab17" role="tabpanel" aria-expanded="true">
+
+            <section class="content-block">
+                <div class="content-wrapper">
+                    <section class="content-block">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- contact form -->
+                                    @*<form action="/Home/ProjeEkle" method="post" enctype="multipart/form-data" id="contact_form" class="waituk_contact-form" novalidate="novalidate">*@
+                                    @using (Html.BeginForm("ProjeEkle", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "waituk_contact-form", autocomplete = "off" }))
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formFileMultiple" class="form-label">&nbsp; </label>
+                                                    <input type="text" placeholder="Proje Adı*" id="con_fname" name="adi" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="formFileMultiple" class="form-label">Kapak Resmi (800x533)</label>
+                                                    <input class="form-control" name="kapak_resim" type="file" id="formFile" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="formFileMultiple" class="form-label">Resimleri Toplu Seçiniz (800x533)</label>
+                                                <input class="form-control" type="file" accept="jpg|png" name="galeriresim" id="formFileMultiple" multiple required>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br />
+                                                    <input type="text" maxlength="100" placeholder="Kısa Açıklama*" id="con_fname" name="kisa_aciklama" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <select class="form-select form-control" name="kategoriID" aria-label="Default select example" required>
+                                                        <option selected>Kategori*</option>
+                                                        @foreach (var item in Model.Kategoris)
+                                                        {
+                                                            <option value="@item.kategoriID">@item.adi</option>
+
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" placeholder="Fon Miktarı ₺*" id="con_fname" name="hedef" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <select class="form-select form-control" id="DrpSehir" name="#" required="">
+                                                        <option selected>İl*</option>
+                                                        @foreach (var item in Model.illers)
+                                                        {
+                                                            <option value="@item.ilID">@item.sehiradi</option>
+
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <select class="form-select form-control" id="Drpilce" name="ilceID" required="">
+                                                        <option selected>İlçe*</option>
+                                                        @foreach (var item2 in Model.ilcelers)
+                                                        {
+                                                            <option value="@item2.ilceID">@item2.ilceadi</option>
+
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Açıklama *" id="con_message" name="aciklama" required></textarea>
+                                        </div>
+                                        <div align="center">
+                                            <br />
+                                            <h4>Ödüller</h4>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="pricing-box-v1 text-center">
+                                                    <br />
+                                                    <div class="form-group">
+                                                        <label for="formFileMultiple" class="form-label">Kapak Resmi (800x533)</label>
+                                                        <input class="form-control" type="file" id="formFile">
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Ödül*" id="con_fname" name="con_fname" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" placeholder="Miktar ₺*" id="con_fname" name="con_fname" class="form-control">
+                                                    </div>
+                                                    <div class="plan-features">
+                                                        <ul>
+                                                            <li align="justify">
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" placeholder="Açıklama *" id="con_message" name="con_message"></textarea>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="pricing-box-v1 text-center">
+                                                    <br />
+                                                    <div class="form-group">
+                                                        <label for="formFileMultiple" class="form-label">Kapak Resmi (800x533)</label>
+                                                        <input class="form-control" type="file" id="formFile">
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Ödül*" id="con_fname" name="con_fname" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" placeholder="Miktar ₺*" id="con_fname" name="con_fname" class="form-control">
+                                                    </div>
+                                                    <div class="plan-features">
+                                                        <ul>
+                                                            <li align="justify">
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" placeholder="Açıklama *" id="con_message" name="con_message"></textarea>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                                <div class="pricing-box-v1 text-center">
+                                                    <br />
+                                                    <div class="form-group">
+                                                        <label for="formFileMultiple" class="form-label">Kapak Resmi (800x533)</label>
+                                                        <input class="form-control" type="file" id="formFile">
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Ödül*" id="con_fname" name="con_fname" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" placeholder="Miktar ₺*" id="con_fname" name="con_fname" class="form-control">
+                                                    </div>
+                                                    <div class="plan-features">
+                                                        <ul>
+                                                            <li align="justify">
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" placeholder="Açıklama *" id="con_message" name="con_message"></textarea>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div align="center">
+                                            <br />
+                                            <h4>Projeyi Oluşturduktan Sonra Ödül Ekleyebilirsiniz</h4>
+                                            <div class="col-sm-6 bottom-space">
+                                                <button href="#" class="btn btn-black btn-small-font has-radius-huge">Proje Ekle<span class="c-ripple js-ripple"><span class="c-ripple__circle"></span></span></button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+
+
+        <div class="tab-pane fade" id="tab19" role="tabpanel" aria-expanded="false">
+            <div class="content-wrapper">
+                <section class="content-block">
+                    <div class="container">
+                        <div class="demo-wrapper">
+                            <div class="demo-wrapper content-block pb-0">
+                                <div class="row">
+                                    @if (ViewBag.title == "Proje Düzenle")
+                                    {
+
+                                        <div class="col-md-12">
+                                            <div class="demo-wrapper">
+                                                <div class="text-center">
+                                                    <div class="bottom-space">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                                            Ödül Ekle
+                                                        </button>
+                                                    </div>
+                                                    <p></p>
+                                                </div>
+                                                <!-- Modal -->
+                                                <div class="modal-wrap">
+                                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-gray-light">
+                                                                    <h5 class="modal-title content-title contact-title mb-0" id="exampleModalLabel">GET IN TOUCH WITH US</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <i class="icon-ios-close-empty"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="#" method="post" id="contact_form" class="waituk_contact-form">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <input type="text" placeholder="Başlık*" id="con_fname" name="con_fname" class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <input type="text" placeholder="LAST NAME *" id="con_lname" name="con_lname" class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <input type="tel" placeholder="PHONE NUMBER" id="con_phone" name="con_phone" class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <textarea class="form-control" placeholder="MESSAGE *" id="con_message" name="con_message"></textarea>
+                                                                        </div>
+                                                                        <div class="btn-container">
+                                                                            <button id="btn_sent" class="btn btn-primary btn-sm" data-dismiss="modal">SUBMIT</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
